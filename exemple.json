@@ -1,0 +1,13 @@
+{
+    "marque" : "toyota",
+    "modele" :  "yaris",
+    "NoChassis" : "AKDHJZHJAJN15465126",
+    "couleur" : "rouge",
+    "masse" : 900,
+    "annee" : 2017,
+    "dimension" : {
+        "longeur" : 3.46,
+        "largeur" : 1.62,
+        "hauteur" : 1.5
+    }
+}
