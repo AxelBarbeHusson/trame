@@ -7,23 +7,60 @@
 </head>
 <body>
 <?php
-/*function cmp($a,$b,$c,$d,$e,$f,$i,$j){
-    return strcmp($a["json"],$b["json"],$c["json"],$d["json"],$e["json"],$f["json"],$i["json"],$j["json"]);
-}
-$jo[0]["json"] = "Name";
-$jo[1]["json"] = "Miles_per_Gallon";
-$jo[2]["json"] = "Cylinders";
-$jo[3]["json"] = "Displacement";
-$jo[4]["json"] = "Horsepower";
-$jo[5]["json"] = "Weight_in_lbs";
-$jo[6]["json"] = "Acceleration";
-$jo[7]["json"] = "Year";
-$jo[8]["json"] = "Origin";
-usort($jo,"cmp");
 
-*/
 $fichier = file_get_contents('./files/cars.json');
 $json = json_decode($fichier, true);
+$ordered = 'Name';
+if (!empty($_GET['ordered'] && $_GET['michel'])){
+    $ordered = $_GET['ordered'];
+    $michel = $_GET['michel'];
+}
+/*function cmp($a,$b){
+    return strcmp($a["Name"],$b["Name"]);
+};*/
+usort($json, function ($a, $b) use ($ordered, $michel) {
+    if ($michel == 'croissant') {
+        if ($a[$ordered] < $b[$ordered]) {
+            return 1;
+        } else if ($a[$ordered] > $b[$ordered]) {
+            return -1;
+        } else {
+            return 0;
+        }
+    } else {
+        if ($a[$ordered] < $b[$ordered]) {
+            return -1;
+        } else if ($a[$ordered] > $b[$ordered]) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    // return(strcmp($a[$ordered], $b[$ordered]));
+})
+?>
+<form action="" method="get">
+    <select name="ordered">
+        <option value="Name">Name</option>
+        <option value="Miles_per_Gallon">Miles_per_Gallon</option>
+        <option value="Cylinders">Cylinders</option>
+        <option value="Displacement">Displacement</option>
+        <option value="Horsepower">Horsepower</option>
+        <option value="Weight_in_lbs">Weight_in_lbs</option>
+        <option value="Acceleration">Acceleration</option>
+        <option value="Year">Year</option>
+        <option value="Origin">Origin</option>
+    </select>
+    <select name="michel">
+        <option name="croissant">croissant</option>
+        <option name="descroissant">descroissant</option>
+    </select>
+    <input type="submit" name="submitted" value="go">
+</form>
+
+
+<?php
 $tableau = "<table>";
 $tableau .= "<caption>Liste des caisses à Greugreu</caption>";
 $tableau .= "<thead>";
